@@ -20,7 +20,7 @@ public class Num1330 {
 		 }
 		 System.out.println(result);
 		 
-		 scanner.close();;
+		 scanner.close();
 	}
 
 }
