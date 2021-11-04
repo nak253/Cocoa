@@ -5,197 +5,197 @@ import java.util.Scanner;
 
 public class Mission2 {
 
-	final int WORLD_SIZE = 5;
-	String[][] world = new String[WORLD_SIZE][WORLD_SIZE];
-	String arrowKey = "";
-	int charactorRowIndex;
-	int charactorColumnIndex;
-	int charactorNextRowIndex;
-	int charactorNextColumnIndex;
+    final int WORLD_SIZE = 5;
+    String[][] world = new String[WORLD_SIZE][WORLD_SIZE];
+    String arrowKey = "";
+    int charactorRowIndex;
+    int charactorColumnIndex;
+    int charactorNextRowIndex;
+    int charactorNextColumnIndex;
 
-	int bombRowIndex;
-	int bombColumnIndex;
-	
-	int monsterRowIndex;
-	int monsterColumnIndex;
-	
-	int point;
+    int bombRowIndex;
+    int bombColumnIndex;
 
-	boolean continueGame;
-	
-	int bombCounter;
+    int monsterRowIndex;
+    int monsterColumnIndex;
 
-	private void createCharactor() {
-		charactorRowIndex = WORLD_SIZE/2;
-		charactorColumnIndex = WORLD_SIZE/2;
-		world[charactorRowIndex][charactorColumnIndex] = "ÁÖÀÎ°ø";
-		
-	}
+    int point;
 
-	private void createBomb() {
-		if(bombCounter==1) {
-			world[bombRowIndex][bombColumnIndex]=null;
-		}
-		
-		bombRowIndex = (int) (Math.random() * WORLD_SIZE);
-		bombColumnIndex = (int) (Math.random() *WORLD_SIZE);
-		
-		if(bombRowIndex == charactorRowIndex && bombColumnIndex ==charactorColumnIndex) {
-			bombCounter=0;
-			createBomb(); //ÆøÅº°ú ÁÖÀÎ°øÀ§Ä¡°¡ °ãÄ¥ °æ¿ì ½ÇÇà
-		}else {
-			world[bombRowIndex][bombColumnIndex] = "ÆøÅº";
-			bombCounter=1;
-		}
+    boolean continueGame;
 
-		
-		
-	}
-	
-	private void createMonster() {
+    int bombCounter;
 
-		monsterRowIndex = (int) (Math.random() * WORLD_SIZE);
-		monsterColumnIndex = (int) (Math.random() *WORLD_SIZE);
-		
-		if ((monsterRowIndex == charactorRowIndex && monsterColumnIndex == charactorColumnIndex)
-				||( monsterRowIndex == bombRowIndex && monsterColumnIndex == bombColumnIndex)) {
-				createMonster(); //±«¹°°ú ÁÖÀÎ°ø ¶Ç´Â ÆøÅºÀ§Ä¡°¡ °ãÄ¥ °æ¿ì ½ÇÇà
-		}else {
-			world[monsterRowIndex][monsterColumnIndex] = "±«¹°";
-		}
-	}
+    private void createCharactor() {
+        charactorRowIndex = WORLD_SIZE/2;
+        charactorColumnIndex = WORLD_SIZE/2;
+        world[charactorRowIndex][charactorColumnIndex] = "ì£¼ì¸ê³µ";
+
+    }
+
+    private void createBomb() {
+        if(bombCounter==1) {
+            world[bombRowIndex][bombColumnIndex]=null;
+        }
+
+        bombRowIndex = (int) (Math.random() * WORLD_SIZE);
+        bombColumnIndex = (int) (Math.random() *WORLD_SIZE);
+
+        if(bombRowIndex == charactorRowIndex && bombColumnIndex ==charactorColumnIndex) {
+            bombCounter=0;
+            createBomb(); //í­íƒ„ê³¼ ì£¼ì¸ê³µìœ„ì¹˜ê°€ ê²¹ì¹  ê²½ìš° ì‹¤í–‰
+        }else {
+            world[bombRowIndex][bombColumnIndex] = "í­íƒ„";
+            bombCounter=1;
+        }
 
 
-	private void startGame() {
-		
-		createCharactor();
-		createBomb();
-		createMonster();
-		continueGame = true;
 
-		while (continueGame) {
-			System.out.println("ÇöÀç¹è¿­ÀÇ »óÅÂ :"+Arrays.deepToString(world));				
-			continueGame = succeedInMoving();
-		}
-		getPoint();
-	}
+    }
 
-	private boolean succeedInMoving() {
+    private void createMonster() {
 
-		
-		if(!menu()) {
-			return false;
-		}
-	
-		if (charactorNextRowIndex < 0 || charactorNextColumnIndex < 0 || charactorNextRowIndex > 4
-				|| charactorNextColumnIndex > 4) {
-			System.out.println("´õ ÀÌ»ó ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù.");
-			return false;
-		}
-		
-		if (isBomb()) {
-			return false;
-		}
-		
-		encounterMonster();
-		return true;
-	}
+        monsterRowIndex = (int) (Math.random() * WORLD_SIZE);
+        monsterColumnIndex = (int) (Math.random() *WORLD_SIZE);
 
-	private boolean menu() {
-		
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("¿øÇÏ´Â ¹æÇâÀ» ÀÔ·ÂÇÏ¼¼¿ä [w,a,s,d] (Á¾·á[q])");
-		System.out.print(">> ");
-		
-		arrowKey=scanner.next().toLowerCase();
-		System.out.println();
-		
-		charactorNextRowIndex=charactorRowIndex;
-		charactorNextColumnIndex=charactorColumnIndex;
-		
-		switch(arrowKey) {
-		case "w": 
-			charactorNextRowIndex = charactorRowIndex-1;
-			break;
-		case "a": 
-			charactorNextColumnIndex = charactorColumnIndex-1;
-			break;
-		case "s": 
-			charactorNextRowIndex = charactorRowIndex+1;	
-			break;
-		case "d": 
-			charactorNextColumnIndex = charactorColumnIndex+1;
-			break;
-		case "q": 
-			return false;
-		default :
-			System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù.");
-			return false;
-		}
-		return true;
-	}
+        if ((monsterRowIndex == charactorRowIndex && monsterColumnIndex == charactorColumnIndex)
+                ||( monsterRowIndex == bombRowIndex && monsterColumnIndex == bombColumnIndex)) {
+            createMonster(); //ê´´ë¬¼ê³¼ ì£¼ì¸ê³µ ë˜ëŠ” í­íƒ„ìœ„ì¹˜ê°€ ê²¹ì¹  ê²½ìš° ì‹¤í–‰
+        }else {
+            world[monsterRowIndex][monsterColumnIndex] = "ê´´ë¬¼";
+        }
+    }
 
-	private void getPoint() {
-		System.out.println("´ç½ÅÀÇ Á¡¼ö´Â "+point+"Á¡ ÀÔ´Ï´Ù.");	
-	}
 
-	private boolean isBomb() {
-		if ("ÆøÅº".equals(world[charactorNextRowIndex][charactorNextColumnIndex])) {
-			System.out.println();
-			System.out.println("ÆøÅºÀ» ¹â¾Ò½À´Ï´Ù.");
-			return true;
-		}
-		return false;
-	}
-	
-	private void encounterMonster() {
-		if ("±«¹°".equals(world[charactorNextRowIndex][charactorNextColumnIndex])) {
-			moveChractor();	
-			System.out.println();
-			System.out.println("±«¹°°ú ¸¸³µ½À´Ï´Ù.");
-			System.out.println("±«¹°¸¦ ¹°¸®ÃÆ½À´Ï´Ù.");
-			System.out.println("ÆøÅº°ú ±«¹°ÀÌ »õ·Ó°Ô ¹èÄ¡µË´Ï´Ù.");
-			System.out.println();
-			
-			scorePoint();
-			createBomb();
-			createMonster();
-			return;
-		}
-		moveChractor();	
-		return;
-	}
+    private void startGame() {
 
-	private void scorePoint() {
-		point++;
-		
-	}
+        createCharactor();
+        createBomb();
+        createMonster();
+        continueGame = true;
 
-	private void moveChractor() {
-		world[charactorNextRowIndex][charactorNextColumnIndex] = world[charactorRowIndex][charactorColumnIndex];
-		world[charactorRowIndex][charactorColumnIndex] = null;
-		charactorRowIndex = charactorNextRowIndex;
-		charactorColumnIndex = charactorNextColumnIndex;
-	}
+        while (continueGame) {
+            System.out.println("í˜„ì¬ë°°ì—´ì˜ ìƒíƒœ :"+Arrays.deepToString(world));
+            continueGame = succeedInMoving();
+        }
+        getPoint();
+    }
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		Mission2 mission = new Mission2();
-		
-		System.out.println("°ÔÀÓÀ» ½ÃÀÛÇÏ°Ú½À´Ï±î?");
-		System.out.println("°ÔÀÓ½ÃÀÛÀ» ¿øÇÑ´Ù¸é ¾Æ¹«¹öÆ°À» ´­·¯ÁÖ¼¼¿ä (Á¾·á:q)");
-		System.out.print(">> ");
-		
-		String select = scanner.next();
+    private boolean succeedInMoving() {
 
-		
-		if (!select.equalsIgnoreCase("q")) {
-			System.out.println();
-			mission.startGame();
-		}
-		System.out.println("°ÔÀÓÀÌ Á¾·áµÇ¾ú½À´Ï´Ù.");
 
-		scanner.close();
-	}
+        if(!menu()) {
+            return false;
+        }
+
+        if (charactorNextRowIndex < 0 || charactorNextColumnIndex < 0 || charactorNextRowIndex > 4
+                || charactorNextColumnIndex > 4) {
+            System.out.println("ë” ì´ìƒ ì´ë™í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+            return false;
+        }
+
+        if (isBomb()) {
+            return false;
+        }
+
+        encounterMonster();
+        return true;
+    }
+
+    private boolean menu() {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("ì›í•˜ëŠ” ë°©í–¥ì„ ì…ë ¥í•˜ì„¸ìš” [w,a,s,d] (ì¢…ë£Œ[q])");
+        System.out.print(">> ");
+
+        arrowKey=scanner.next().toLowerCase();
+        System.out.println();
+
+        charactorNextRowIndex=charactorRowIndex;
+        charactorNextColumnIndex=charactorColumnIndex;
+
+        switch(arrowKey) {
+            case "w":
+                charactorNextRowIndex = charactorRowIndex-1;
+                break;
+            case "a":
+                charactorNextColumnIndex = charactorColumnIndex-1;
+                break;
+            case "s":
+                charactorNextRowIndex = charactorRowIndex+1;
+                break;
+            case "d":
+                charactorNextColumnIndex = charactorColumnIndex+1;
+                break;
+            case "q":
+                return false;
+            default :
+                System.out.println("ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.");
+                return false;
+        }
+        return true;
+    }
+
+    private void getPoint() {
+        System.out.println("ë‹¹ì‹ ì˜ ì ìˆ˜ëŠ” "+point+"ì  ì…ë‹ˆë‹¤.");
+    }
+
+    private boolean isBomb() {
+        if ("í­íƒ„".equals(world[charactorNextRowIndex][charactorNextColumnIndex])) {
+            System.out.println();
+            System.out.println("í­íƒ„ì„ ë°Ÿì•˜ìŠµë‹ˆë‹¤.");
+            return true;
+        }
+        return false;
+    }
+
+    private void encounterMonster() {
+        if ("ê´´ë¬¼".equals(world[charactorNextRowIndex][charactorNextColumnIndex])) {
+            moveChractor();
+            System.out.println();
+            System.out.println("ê´´ë¬¼ê³¼ ë§Œë‚¬ìŠµë‹ˆë‹¤.");
+            System.out.println("ê´´ë¬¼ë¥¼ ë¬¼ë¦¬ì³¤ìŠµë‹ˆë‹¤.");
+            System.out.println("í­íƒ„ê³¼ ê´´ë¬¼ì´ ìƒˆë¡­ê²Œ ë°°ì¹˜ë©ë‹ˆë‹¤.");
+            System.out.println();
+
+            scorePoint();
+            createBomb();
+            createMonster();
+            return;
+        }
+        moveChractor();
+        return;
+    }
+
+    private void scorePoint() {
+        point++;
+
+    }
+
+    private void moveChractor() {
+        world[charactorNextRowIndex][charactorNextColumnIndex] = world[charactorRowIndex][charactorColumnIndex];
+        world[charactorRowIndex][charactorColumnIndex] = null;
+        charactorRowIndex = charactorNextRowIndex;
+        charactorColumnIndex = charactorNextColumnIndex;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Mission2 mission = new Mission2();
+
+        System.out.println("ê²Œì„ì„ ì‹œì‘í•˜ê² ìŠµë‹ˆê¹Œ?");
+        System.out.println("ê²Œì„ì‹œì‘ì„ ì›í•œë‹¤ë©´ ì•„ë¬´ë²„íŠ¼ì„ ëˆŒëŸ¬ì£¼ì„¸ìš” (ì¢…ë£Œ:q)");
+        System.out.print(">> ");
+
+        String select = scanner.next();
+
+
+        if (!select.equalsIgnoreCase("q")) {
+            System.out.println();
+            mission.startGame();
+        }
+        System.out.println("ê²Œì„ì´ ì¢…ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+
+        scanner.close();
+    }
 
 }
