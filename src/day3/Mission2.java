@@ -39,6 +39,7 @@ public class Mission2 {
 		
 		bombRowIndex = (int) (Math.random() * WORLD_SIZE);
 		bombColumnIndex = (int) (Math.random() *WORLD_SIZE);
+		
 		if(bombRowIndex == charactorRowIndex && bombColumnIndex ==charactorColumnIndex) {
 			bombCounter=0;
 			createBomb(); //폭탄과 주인공위치가 겹칠 경우 실행
@@ -127,7 +128,9 @@ public class Mission2 {
 			break;
 		case "q": 
 			return false;
-
+		default :
+			System.out.println("잘못된 입력입니다.");
+			return false;
 		}
 		return true;
 	}
