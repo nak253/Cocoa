@@ -5,8 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Mission3 {
-    Map<String,String> user;
-    List<ArrayList> list = new ArrayList<ArrayList>();
+    static Map<String,String> user;
+    static List<ArrayList> list = new ArrayList<ArrayList>();
+    static Scanner s = new Scanner(System.in);
 
     public void startHouseKeepingBook(){
         String menu ="";
@@ -15,11 +16,12 @@ public class Mission3 {
         while (!menu.equals("q")){
             printMenu();
             menu = selectMenu();
+            s.nextLine();
         }
     }
 
     private HashMap<String,String> registerUser() {
-        Scanner s = new Scanner(System.in);
+
         HashMap<String,String> user = new HashMap<String,String>();
 
         System.out.println("사용자 이름을 입력하세요.");
@@ -40,7 +42,6 @@ public class Mission3 {
     }
 
     private String selectMenu() {
-        Scanner s = new Scanner(System.in);
         String menu = s.nextLine();
         switch (menu.toLowerCase()){
             case "1":
@@ -78,7 +79,6 @@ public class Mission3 {
     }
 
     private String enterDate() {
-        Scanner s= new Scanner(System.in);
 
         String pattern ="yyyy/mm/dd";
         DateFormat df = new SimpleDateFormat(pattern);
@@ -96,25 +96,21 @@ public class Mission3 {
     }
 
     private String enterNote() {
-        Scanner s= new Scanner(System.in);
         System.out.println("적요를 입력하세요");
         return s.nextLine();
     }
 
     private int enterRevenue() {
-        Scanner s= new Scanner(System.in);
         System.out.println("수입을 입력하세요");
         return s.nextInt();
     }
 
     private int enterExpenditure() {
-        Scanner s= new Scanner(System.in);
         System.out.println("지출을 입력하세요");
         return s.nextInt();
     }
 
     private void calculateBalance(ArrayList item) {
-        System.out.println("item = " + item);
         int revenue =(Integer)item.get(2);
         int expenditure =(Integer)item.get(3);
 
@@ -122,7 +118,6 @@ public class Mission3 {
     }
 
     private void deleteData() {
-        Scanner s = new Scanner(System.in);
 
         System.out.println("삭제할 순번을 입력하세요");
         int index = s.nextInt()-1;
@@ -135,9 +130,9 @@ public class Mission3 {
     }
 
     private void modifyData() {
-        Scanner s = new Scanner(System.in);
         System.out.println("수정할 순번을 입력하세요");
         int index = s.nextInt()-1;
+        s.nextLine();
         String menu = "";
 
         if(!checkNum(index,list)){
@@ -155,9 +150,9 @@ public class Mission3 {
     }
 
     private void modifyItem(ArrayList item) {
-        Scanner s = new Scanner(System.in);
 
         int index = s.nextInt()-1;
+        s.nextLine();
 
         if(!checkNum(index,item)){
             return;
@@ -216,5 +211,6 @@ public class Mission3 {
     public static void main(String[] args) {
         Mission3 m = new Mission3();
         m.startHouseKeepingBook();
+        s.close();
     }
 }
