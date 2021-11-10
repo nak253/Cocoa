@@ -80,7 +80,7 @@ public class Mission3 {
 
     private String enterDate() {
 
-        String pattern ="yyyy/mm/dd";
+        String pattern ="MM/dd";
         DateFormat df = new SimpleDateFormat(pattern);
         Date d = null;
         System.out.println("날짜를 "+pattern+"형식으로 입력하세요.");
