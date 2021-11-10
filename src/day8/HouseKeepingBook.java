@@ -9,24 +9,19 @@ public class HouseKeepingBook {
     private List<BookDetail> list ;
 
     public void init() {
-        User user = new User();
-        user.registerUser();
+        //User user = new User();
+        //user.registerUser();
         list = new ArrayList<>();
-        System.out.println("user = " + user);
     }
 
     public void start() {
         Menu menu = new Menu();
-        String option="";
         while (true){
-            menu.printMainMenu();
-            option = menu.selectMenu();
-            if (!menu.isContinue(option)){
+            menu.startMainMenu();
+            if(!menu.isContinue()){
                 break;
             }
-            System.out.println(option);
+            menu.selectMainMenu(list);
         }
     }
-
-
 }

@@ -1,21 +1,28 @@
 package day8;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    final char MIN_MENU_NUM='1';
-    final char MAX_MENU_NUM='4';
+    final int MAIN_MENU_MIN_NUM =1;
+    final int MAIN_MENU_MAX_NUM =4;
+    private boolean isContinue;
+    private String mainMenuOption;
 
-    public boolean isContinue(String option){
-        if(option.equalsIgnoreCase("q")){
-            System.out.println("가계부를 종료합니다.");
-            return false;
+    public void startMainMenu() {
+        ValidationCheck vc = new ValidationCheck();
+        while (true){
+            printMainMenu();
+            inputMenuOption();
+            if(vc.isQuit(mainMenuOption)){
+                isContinue = false;
+                break;
+            }
+            if (vc.isCorrectInput(mainMenuOption,MAIN_MENU_MIN_NUM,MAIN_MENU_MAX_NUM)) {
+                isContinue = true;
+                break;
+            }
         }
-        if(!(MIN_MENU_NUM<=option.charAt(0)&&option.charAt(0)<=MAX_MENU_NUM)){
-            System.out.println("올바른 값을 입력하세요.");
-            return false;
-        }
-        return true;
     }
 
     public void printMainMenu() {
@@ -27,8 +34,30 @@ public class Menu {
         System.out.println("q: 종료");
     }
 
-    public String selectMenu() {
+    public void inputMenuOption() {
         Scanner s = new Scanner(System.in);
-        return s.next();
+        this.mainMenuOption = s.nextLine();
+    }
+
+    public boolean isContinue(){
+        return this.isContinue;
+    }
+
+    public void selectMainMenu(List<BookDetail> list) {
+        BookData bookData = new BookData();
+        switch (mainMenuOption){
+            case "1":
+                bookData.inputData(list);
+                break;
+//            case "2":
+//                deleteData(list);
+//                break;
+//            case "3":
+//                modifyData(list;
+//                break;
+            case "4":
+                bookData.printAccountBook(list);
+                break;
+        }
     }
 }
