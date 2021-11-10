@@ -17,6 +17,7 @@ public class BookDetail {
     int sum;
 
     public void enterDate() {
+        date = "";
         Scanner s = new Scanner(System.in);
         String pattern ="MM/dd";
         DateFormat df = new SimpleDateFormat(pattern);
@@ -34,24 +35,28 @@ public class BookDetail {
     }
 
     public void enterNote() {
+        note ="";
         Scanner s = new Scanner(System.in);
         System.out.println("적요를 입력하세요");
         note = s.nextLine();
     }
 
     public void enterRevenue() {
+        revenue = 0;
         Scanner s = new Scanner(System.in);
         System.out.println("수입을 입력하세요");
         revenue = s.nextInt();
     }
 
     public void enterExpenditure() {
+        expenditure =0;
         Scanner s = new Scanner(System.in);
         System.out.println("지출을 입력하세요");
         expenditure = s.nextInt();
     }
 
     public void enterFormsOfPayment() {
+        formsOfPayment="";
         Scanner s = new Scanner(System.in);
         ValidationCheck vc = new ValidationCheck();
         String option ="";
