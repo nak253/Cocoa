@@ -38,13 +38,21 @@ public class BookData {
     }
 
     private void modifyBookDetail(BookDetail bookDetail) {
-        Menu menu = new Menu();
+        ModifyMenu menu = new ModifyMenu();
 
-        menu.startModifyMenu();
+        menu.startMenu();
+        if(!menu.isContinue()){
+            System.out.println("이전 메뉴로 돌아갑니다.");
+            return;
+        }
         menu.selectModifyMenu(bookDetail);
     }
 
     public void printAccountBook(List<BookDetail> list) {
+        if(list.isEmpty()){
+            System.out.println("가계부가 없습니다.");
+            return;
+        }
         for (int i = 0; i < list.size(); i++) {
             System.out.printf(" "+(i+1)+" : ");
             System.out.println(list.get(i));

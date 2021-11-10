@@ -8,7 +8,6 @@ public class ValidationCheck {
 
     public boolean isQuit(String option) {
         if(option.equalsIgnoreCase("q")){
-            System.out.println("가계부를 종료합니다.");
             return true;
         }
         return false;

@@ -15,10 +15,11 @@ public class HouseKeepingBook {
     }
 
     public void start() {
-        Menu menu = new Menu();
+        MainMenu menu = new MainMenu();
         while (true){
-            menu.startMainMenu();
+            menu.startMenu();
             if(!menu.isContinue()){
+                System.out.println("가계부를 종료합니다.");
                 break;
             }
             menu.selectMainMenu(list);
