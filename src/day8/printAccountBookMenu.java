@@ -1,5 +1,8 @@
 package day8;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class printAccountBookMenu extends Menu {
@@ -22,18 +25,35 @@ public class printAccountBookMenu extends Menu {
     public void selectPrintMenu(List<BookDetail> list) {
         switch (this.option) {
             case "1":
-                normalPrint(list);
+                printBookList(list);
                 break;
             case "2":
+                printBookList(sortBookDetail(list));
                 break;
             case "3":
+                printBookList(sortBookDetail(list,new SortMoneyInASC()));
                 break;
             case "4":
+                printBookList(sortBookDetail(list,new SortMoneyInDESC()));
                 break;
         }
     }
 
-    public void normalPrint(List<BookDetail> list){
+    private List<BookDetail> sortBookDetail(List<BookDetail> list) {
+        List<BookDetail> sortedList = new ArrayList<>();
+        sortedList.addAll(list);
+        Collections.sort(sortedList);
+        return sortedList;
+    }
+
+    private List<BookDetail> sortBookDetail(List<BookDetail> list, Comparator<? super BookDetail> comparator) {
+        List<BookDetail> sortedList = new ArrayList<>();
+        sortedList.addAll(list);
+        Collections.sort(sortedList,comparator);
+        return sortedList;
+    }
+
+    public void printBookList(List<BookDetail> list){
         for (int i = 0; i < list.size(); i++) {
             System.out.printf(" "+(i+1)+" : ");
             System.out.println(list.get(i));

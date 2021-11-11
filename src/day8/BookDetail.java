@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class BookDetail {
+public class BookDetail implements Comparable{
     final int PAYMENT_MIN_NUM =1;
     final int PAYMENT_MAX_NUM =2;
 
@@ -15,6 +15,14 @@ public class BookDetail {
     int expenditure;
     String formsOfPayment;
     int sum;
+
+    public String getDate() {
+        return date;
+    }
+
+    public int getSum() {
+        return sum;
+    }
 
     public void enterDate() {
         date = "";
@@ -46,13 +54,19 @@ public class BookDetail {
         Scanner s = new Scanner(System.in);
         System.out.println("수입을 입력하세요");
         revenue = s.nextInt();
+        sumUp();
     }
 
     public void enterExpenditure() {
-        expenditure =0;
+        expenditure = 0;
         Scanner s = new Scanner(System.in);
         System.out.println("지출을 입력하세요");
         expenditure = s.nextInt();
+        sumUp();
+    }
+
+    private void sumUp(){
+        this.sum = this.revenue - this.expenditure;
     }
 
     public void enterFormsOfPayment() {
@@ -83,6 +97,16 @@ public class BookDetail {
     public String toString() {
         return "날짜=" +date+ ", 적요=" +note+", 수입=" + revenue +
                 ", 지출=" + expenditure +
-                ", 지불방식=" + formsOfPayment ;
+                ", 지불방식=" + formsOfPayment +
+                ", 합계=" + sum ;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return compareTo((BookDetail) o);
+    }
+
+    public int compareTo(BookDetail bookDetail) {
+        return this.date.compareTo(bookDetail.date);
     }
 }

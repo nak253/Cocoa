@@ -18,9 +18,12 @@ public class BookData {
 
     public void deleteData(List<BookDetail> list) {
         ValidationCheck vc = new ValidationCheck();
+        if(!vc.checkListEmpty(list)){
+            return;
+        }
         System.out.println("삭제할 순번을 입력하세요");
         int index = vc.inputListIndex(list);
-        if(!vc.checkList(list,index)){
+        if(!vc.checkListSize(list,index)){
             return;
         }
         list.remove(index);
@@ -29,9 +32,12 @@ public class BookData {
 
     public void modifyData(List<BookDetail> list) {
         ValidationCheck vc = new ValidationCheck();
+        if(!vc.checkListEmpty(list)){
+            return;
+        }
         System.out.println("수정할 순번을 입력하세요");
         int index = vc.inputListIndex(list);
-        if(!vc.checkList(list,index)){
+        if(!vc.checkListSize(list,index)){
             return;
         }
         modifyBookDetail(list.get(index));

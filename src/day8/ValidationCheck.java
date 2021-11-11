@@ -40,11 +40,16 @@ public class ValidationCheck {
         return index;
     }
 
-    public boolean checkList(List<BookDetail> list, int index){
+    public boolean checkListEmpty(List<BookDetail> list){
         if(list.isEmpty()){
             System.out.println("가계부가 존재하지 않습니다.");
             return false;
         }
+        return true;
+    }
+
+    public boolean checkListSize(List<BookDetail> list, int index){
+
         if(index<0||list.size()-1<index) {
             System.out.println("해당 목록이 존재하지 않습니다.");
             return false;
