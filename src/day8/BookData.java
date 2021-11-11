@@ -39,7 +39,6 @@ public class BookData {
 
     private void modifyBookDetail(BookDetail bookDetail) {
         ModifyMenu menu = new ModifyMenu();
-
         menu.startMenu();
         if(!menu.isContinue()){
             System.out.println("이전 메뉴로 돌아갑니다.");
@@ -53,9 +52,13 @@ public class BookData {
             System.out.println("가계부가 없습니다.");
             return;
         }
-        for (int i = 0; i < list.size(); i++) {
-            System.out.printf(" "+(i+1)+" : ");
-            System.out.println(list.get(i));
+        printAccountBookMenu menu = new printAccountBookMenu();
+        menu.startMenu();
+        if(!menu.isContinue()){
+            System.out.println("이전 메뉴로 돌아갑니다.");
+            return;
         }
+        menu.selectPrintMenu(list);
+
     }
 }
