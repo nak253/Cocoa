@@ -17,7 +17,6 @@ public class ModifyMenu extends Menu{
         System.out.println("q: 이전 메뉴");
     }
     public void selectModifyMenu(BookDetail bookDetail) {
-        BookData bookData = new BookData();
         switch (this.option){
             case "1" :
                 bookDetail.enterDate();
