@@ -8,12 +8,12 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class PrintCalendar {
-    static LocalDate date ;
+
     private static int year;
     private static int month;
 
     public PrintCalendar() {
-        this.date = LocalDate.now();
+        LocalDate date = LocalDate.now();
         this.year = date.getYear();
         this.month = date.getMonthValue();
     }
@@ -51,19 +51,19 @@ public class PrintCalendar {
     }
 
     private void PrintCalendar(){
-        LocalDate startOfMonth = LocalDate.of(this.year,this.month,1);
-        LocalDate endOfMonth =  LocalDate.of(this.year,this.month,startOfMonth.lengthOfMonth());
+        LocalDate startDate = LocalDate.of(this.year,this.month,1);
+        LocalDate endDate =  LocalDate.of(this.year,this.month,startDate.lengthOfMonth());
 
-        int startDayOfWeek = startOfMonth.getDayOfWeek().getValue();
-        int lastDayOfMonth = endOfMonth.getDayOfMonth();
-
+        int startDayOfWeek = startDate.getDayOfWeek().getValue();
+        int lastDayOfMonth = endDate.getDayOfMonth();
+        System.out.printf("%4s %s%n",this.year,this.month);
         printDayOfWeek();
         printDay(startDayOfWeek,lastDayOfMonth);
     }
 
     private static void printDayOfWeek() {
         for(DayOfWeek dayOfWeek : DayOfWeek.values()){
-            System.out.printf("%5s",dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
+            System.out.printf("%4s",dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
         }
         System.out.println();
     }
@@ -71,10 +71,10 @@ public class PrintCalendar {
 
     private static void printDay(int startDayOfWeek,int lastDayOfMonth) {
         for (int i = 1; i < startDayOfWeek; i++) {
-            System.out.printf("%5s"," ");
+            System.out.printf("%4s"," ");
         }
         for (int i = 1, n =startDayOfWeek; i <=lastDayOfMonth; i++,n++) {
-            System.out.printf("%5s",i);
+            System.out.printf("%4s",i);
             if(n%7==0){
                 System.out.println();
             }
