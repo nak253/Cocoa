@@ -20,7 +20,8 @@ public class ClockAndCal {
     private void selectCommand(String option) {
         switch (option){
             case "clock" :
-                System.out.println("아직 구현 안됨");
+                HangleClock hangleClock = new HangleClock();
+                HangleClock.start();
                 break;
             case "cal" :
                 PrintCalendar printCalendar = new PrintCalendar();
