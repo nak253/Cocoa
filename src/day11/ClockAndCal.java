@@ -21,7 +21,7 @@ public class ClockAndCal {
         switch (option){
             case "clock" :
                 HangleClock hangleClock = new HangleClock();
-                HangleClock.start();
+                hangleClock.start();
                 break;
             case "cal" :
                 PrintCalendar printCalendar = new PrintCalendar();
