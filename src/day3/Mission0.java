@@ -24,7 +24,7 @@ public class Mission0 {
 	}
 	
 	public void printRandomMember(int num) {
-		if(num>memberList.length||num<1) {
+		if(memberList.length<num||num<1) {
 			System.out.println("다시 입력해주세요");
 			return;
 		}
@@ -35,7 +35,9 @@ public class Mission0 {
 		Mission0 mission = new Mission0();
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("몇 명인가요? ");
+		
 		int num =scanner.nextInt();
+		
 		mission.printRandomMember(num); 
 		scanner.close();
 	}
