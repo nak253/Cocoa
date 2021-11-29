@@ -1,9 +1,8 @@
 package baseball;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.LinkedHashSet;
 
 public class Answer {
 
@@ -17,11 +16,11 @@ public class Answer {
     public Answer() {
         correctAnswer = new String[ANSWER_SIZE];
         setCorrectAnswer(correctAnswer);
-       // System.out.println("correctAnswer = " + Arrays.toString(correctAnswer));
+        //System.out.println("correctAnswer = " + Arrays.toString(correctAnswer));
     }
 
     private void setCorrectAnswer(String[] correctAnswer) {
-        Set<String> set = new HashSet<>();
+        Set<String> set = new LinkedHashSet<>();
         int random =0;
         while (set.size()<ANSWER_SIZE){
             random = (int)(Math.random()*10);
@@ -31,6 +30,8 @@ public class Answer {
     }
 
     public void setUserAnswer(Scanner scanner) {
+        System.out.println("3자리 숫자를 입력하세요. (ex: 123)");
+        System.out.print("> ");
         String str = scanner.nextLine();
         this.userAnswer =str.split("");
     }
@@ -51,13 +52,13 @@ public class Answer {
     }
 
     private void compareAnswer() {
-        for (int userAnswerIndex = 0; userAnswerIndex < userAnswer.length; userAnswerIndex++) {
+        for (int userAnswerIndex = 0; userAnswerIndex < ANSWER_SIZE; userAnswerIndex++) {
             loopCorrectAnswer(userAnswerIndex);
         }
     }
 
     private void loopCorrectAnswer(int userAnswerIndex) {
-        for (int correctAnswerIndex = 0; correctAnswerIndex < correctAnswer.length; correctAnswerIndex++) {
+        for (int correctAnswerIndex = 0; correctAnswerIndex < ANSWER_SIZE; correctAnswerIndex++) {
             checkBallAndStrike(userAnswerIndex,correctAnswerIndex);
         }
     }
