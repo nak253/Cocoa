@@ -1,5 +1,6 @@
 package steppingStone;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,13 +17,16 @@ public class Bridge {
     public Bridge() {
         bridge = new String[WIDTH_OF_BRIDGE][LENGTH_OF_BRIDGE];
         p = new Player();
+        gl = new ArrayList<>();
+        this.setGlass();
     }
 
     private void setGlass() {
-        for (int i = 0; i < LENGTH_OF_BRIDGE; i++) {
+        for (int i = 1; i <= LENGTH_OF_BRIDGE; i++) {
             int random = (int) (Math.random() * WIDTH_OF_BRIDGE);
             gl.add(new Glass(random, i));
         }
+        System.out.println("gl = " + gl);
     }
 
     public void setBridge() {

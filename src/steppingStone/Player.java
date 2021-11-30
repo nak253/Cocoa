@@ -17,7 +17,7 @@ public class Player {
         this.previousX = this.currentX;
         this.previousY = this.currentY;
 
-        System.out.println("위 또는 아래를 입력하세요");
+        System.out.println("위(W)또는 아래(S)를 입력하세요");
         String input = scanner.nextLine();
         switch (input.toLowerCase()){
             case upKey:
@@ -32,7 +32,7 @@ public class Player {
 
     public void setPlayerPosition(String[][] bridge) {
         bridge[this.previousX][this.previousY] = null;
-        bridge[this.currentX][this.currentY] = "*";
+        bridge[this.currentX][this.currentY] = "O";
     }
 
     public boolean isGoal(int goal) {
