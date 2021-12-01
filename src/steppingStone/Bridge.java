@@ -6,6 +6,7 @@ public class Bridge {
 
     private Element[][] elements;
 
+    private boolean goal;
 
     public Bridge() {
         elements = new Element[WIDTH_OF_BRIDGE][LENGTH_OF_BRIDGE];
@@ -31,15 +32,8 @@ public class Bridge {
     public boolean isPassStep(Player player) {
         elements[player.getPreviousY()][player.getPreviousX()] = null;
 
-        if (isGoal(player)) {
-            System.out.println("참가자가 무사히 도착하였습니다.");
-            return false;
-        }
-
-        if (elements[player.getCurrentY()][player.getCurrentX()] != null) {
-            Glass glass = (Glass) (elements[player.getCurrentY()][player.getCurrentX()]);
-            glass.breakGlass();
-            System.out.println("실패하였습니다.");
+        if (player.getCurrentX()== LENGTH_OF_BRIDGE) {
+            goal = true;
             return false;
         }
 
@@ -53,9 +47,8 @@ public class Bridge {
         elements[player.getCurrentY()][player.getCurrentX()] = player;
         return true;
     }
-    public boolean isGoal(Player player) {
-        return player.getCurrentX()== LENGTH_OF_BRIDGE;
+
+    public boolean isGoal() {
+        return goal;
     }
-
-
 }

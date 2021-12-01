@@ -11,8 +11,6 @@ public class User extends Player{
     private Scanner scanner;
     private Validator validator;
 
-    private int numOfSuccesses;
-
     public User() {
         scanner = new Scanner(System.in);
         validator = new Validator();
@@ -41,7 +39,6 @@ public class User extends Player{
                 break;
         }
     }
-
 
     @Override
     public String toString() {

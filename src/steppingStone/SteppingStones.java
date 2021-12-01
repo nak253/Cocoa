@@ -18,33 +18,40 @@ public class SteppingStones {
 
     public void start() {
         setPlayerNum();
-        while (!isStop()){
+        while (!stopped&&!isPlayerTurn()){
             comStart();
+        }
+        if(!stopped){
             playerStart();
         }
-
         System.out.println("게임이 종료되었습니다.");
     }
 
+    private boolean isPlayerTurn() {
+        return count == playerNum;
+    }
+
     private void comStart() {
-        while (!isPlayerTurn(playerNum)) {
-            bridge.printBridge();
-            countPlayer();
-            Com com = new Com();
-            crossTheBridge(com);
-        }
+        bridge.printBridge();
+        printPlayerNum();
+        Com com = new Com();
+        crossTheBridge(com);
     }
 
     private void playerStart() {
         bridge.printBridge();
-        countPlayer();
+        printPlayerNum();
         user = new User();
         crossTheBridge(user);
+        stopped = true;
     }
 
+    private void printPlayerNum() {
+        System.out.println(count + 1 + "번 참가자가 입장합니다.");
+    }
     private void setPlayerNum() {
         playerNum = (int) (Math.random() * TOTAL_PLAYER_NUM);
-        System.out.println("당신은 " + (playerNum+1) + "번 참가자입니다.");
+        System.out.println("당신은 " + (playerNum + 1) + "번 참가자입니다.");
     }
 
     private void crossTheBridge(Player player) {
@@ -52,21 +59,10 @@ public class SteppingStones {
             bridge.printBridge();
             player.move();
         }
-        if(bridge.isGoal(player)){
-            this.stopped = true;
+        if(bridge.isGoal()){
+            System.out.println(count+ 1 +"번 참가자가 무사히 건넜습니다.");
+            stopped = true;
         }
-    }
-
-    public void countPlayer() {
-        System.out.println(count+1+ "번 참가자가 입장합니다.");
         count++;
-    }
-
-    public boolean isPlayerTurn(int playerNum) {
-        return count == playerNum;
-    }
-
-    public boolean isStop() {
-        return stopped;
     }
 }

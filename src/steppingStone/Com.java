@@ -2,8 +2,6 @@ package steppingStone;
 
 public class Com extends Player{
 
-    private int numOfSuccesses;
-
     public Com() {
         selectUpOrDown();
     }
