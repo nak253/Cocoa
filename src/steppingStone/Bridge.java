@@ -2,7 +2,7 @@ package steppingStone;
 
 public class Bridge {
     private final int WIDTH_OF_BRIDGE = 2;
-    private final int LENGTH_OF_BRIDGE = 8;
+    private final int LENGTH_OF_BRIDGE = 4;
 
     private Element[][] elements;
 
@@ -35,7 +35,10 @@ public class Bridge {
     }
 
     public boolean isPassStep(Player player) {
-        elements[player.getPreviousY()][player.getPreviousX()] = null;
+        if(!(elements[player.getPreviousY()][player.getPreviousX()] instanceof Glass)){
+            elements[player.getPreviousY()][player.getPreviousX()] = null;
+        }
+
         if (player.getCurrentX()== LENGTH_OF_BRIDGE-1) {
             goal = true;
             return false;
@@ -43,10 +46,9 @@ public class Bridge {
         if (elements[player.getCurrentY()][player.getCurrentX()] != null) {
             Glass glass = (Glass) (elements[player.getCurrentY()][player.getCurrentX()]);
             glass.breakGlass();
-            System.out.println("실패하였습니다.\n");
+            System.out.println("실패하였습니다.");
             return false;
         }
-
         elements[player.getCurrentY()][player.getCurrentX()] = player;
         return true;
     }
