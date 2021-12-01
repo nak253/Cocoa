@@ -14,6 +14,9 @@ public class User extends Player{
     public User() {
         scanner = new Scanner(System.in);
         validator = new Validator();
+    }
+
+    public void firstTurn() {
         selectUpOrDown();
     }
 

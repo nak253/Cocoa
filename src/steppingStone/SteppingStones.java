@@ -32,14 +32,12 @@ public class SteppingStones {
     }
 
     private void comStart() {
-        bridge.printBridge();
         printPlayerNum();
-        Com com = new Com();
+        Com com = new Com(bridge);
         crossTheBridge(com);
     }
 
     private void playerStart() {
-        bridge.printBridge();
         printPlayerNum();
         user = new User();
         crossTheBridge(user);
@@ -51,14 +49,21 @@ public class SteppingStones {
     }
     private void setPlayerNum() {
         playerNum = (int) (Math.random() * TOTAL_PLAYER_NUM);
-        System.out.println("당신은 " + (playerNum + 1) + "번 참가자입니다.");
+        System.out.println("\n당신은 " + (playerNum + 1) + "번 참가자입니다.\n");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void crossTheBridge(Player player) {
+        player.firstTurn();
         while (bridge.isPassStep(player)) {
             bridge.printBridge();
             player.move();
         }
+        bridge.printBridge();
         if(bridge.isGoal()){
             System.out.println(count+ 1 +"번 참가자가 무사히 건넜습니다.");
             stopped = true;
