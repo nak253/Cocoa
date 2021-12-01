@@ -6,8 +6,6 @@ public class Bridge {
 
     private Element[][] elements;
 
-    private boolean stopped;
-    private int count;
 
     public Bridge() {
         elements = new Element[WIDTH_OF_BRIDGE][LENGTH_OF_BRIDGE];
@@ -33,9 +31,15 @@ public class Bridge {
     public boolean isPassStep(Player player) {
         elements[player.getPreviousY()][player.getPreviousX()] = null;
 
-        if (player.isGoal(LENGTH_OF_BRIDGE)) {
-            System.out.println(count + "번 참가자가 무사히 도착하였습니다.");
-            stopped = true;
+        if (isGoal(player)) {
+            System.out.println("참가자가 무사히 도착하였습니다.");
+            return false;
+        }
+
+        if (elements[player.getCurrentY()][player.getCurrentX()] != null) {
+            Glass glass = (Glass) (elements[player.getCurrentY()][player.getCurrentX()]);
+            glass.breakGlass();
+            System.out.println("실패하였습니다.");
             return false;
         }
 
@@ -49,14 +53,9 @@ public class Bridge {
         elements[player.getCurrentY()][player.getCurrentX()] = player;
         return true;
     }
-
-    public boolean isStop() {
-        return stopped;
+    public boolean isGoal(Player player) {
+        return player.getCurrentX()== LENGTH_OF_BRIDGE;
     }
 
-    public void countPlayer() {
-        count++;
-        System.out.println(count + "번 참가자가 입장합니다.");
 
-    }
 }

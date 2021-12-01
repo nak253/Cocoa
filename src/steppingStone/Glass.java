@@ -10,6 +10,10 @@ public class Glass extends Element{
         this.broken = true;
     }
 
+    public boolean isBroken() {
+        return broken;
+    }
+
     @Override
     public String toString() {
         if (this.broken ==true){
