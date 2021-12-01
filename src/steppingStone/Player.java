@@ -2,40 +2,68 @@ package steppingStone;
 
 import java.util.Scanner;
 
-public class Player {
+public class Player extends Element{
     private final String upKey="w";
     private final String downKey="s";
+    private final int UP =0;
+    private final int DOWN =1;
 
     private int previousX;
     private int previousY;
     private int currentX;
     private int currentY;
 
-    public Player() {}
+    private int numOfSuccesses;
 
-    public void move(Scanner scanner) {
-        this.previousX = this.currentX;
-        this.previousY = this.currentY;
+    public Player(Scanner scanner,Validator validator) {
+        selectUpOrDown(scanner,validator);
+    }
 
-        System.out.println("위(W)또는 아래(S)를 입력하세요");
-        String input = scanner.nextLine();
-        switch (input.toLowerCase()){
+    public int getPreviousX() {
+        return previousX;
+    }
+
+    public int getPreviousY() {
+        return previousY;
+    }
+
+    public int getCurrentX() {
+        return currentX;
+    }
+
+    public int getCurrentY() {
+        return currentY;
+    }
+
+    public void move(Scanner scanner, Validator validator) {
+        previousX=currentX;
+        previousY=currentY;
+        selectUpOrDown(scanner,validator);
+        currentX++;
+    }
+
+    private void selectUpOrDown(Scanner scanner,Validator validator) {
+        String input = "";
+        while (!validator.correctInput(input)){
+            System.out.println("위(W)또는 아래(S)를 입력하세요");
+            input = scanner.nextLine();
+        }
+        switch (input){
             case upKey:
-                this.currentX=0;
+                currentY = UP;
                 break;
             case downKey:
-                this.currentX=1;
+                currentY = DOWN;
                 break;
         }
-        this.currentY++;
     }
 
-    public void setPlayerPosition(String[][] bridge) {
-        bridge[this.previousX][this.previousY] = null;
-        bridge[this.currentX][this.currentY] = "O";
+    public boolean isGoal(int lengthOfBridge) {
+        return currentX == lengthOfBridge;
     }
 
-    public boolean isGoal(int goal) {
-        return this.currentY+1 == goal;
+    @Override
+    public String toString() {
+        return "P";
     }
 }

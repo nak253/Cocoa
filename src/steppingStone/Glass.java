@@ -1,19 +1,20 @@
 package steppingStone;
 
-public class Glass {
-    private int x;
-    private int y;
-    private boolean breaked;
+public class Glass extends Element{
+
+    private boolean broken;
 
     public Glass(){}
 
-    public Glass(int x, int y) {
-        this.x =x;
-        this.y =y;
+    public void breakGlass() {
+        this.broken = true;
     }
 
     @Override
     public String toString() {
-        return "["+ x +"," + y +"]";
+        if (this.broken ==true){
+            return "x";
+        }
+        return " ";
     }
 }
