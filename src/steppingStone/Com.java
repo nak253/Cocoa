@@ -8,10 +8,6 @@ public class Com extends Player {
         this.bridge = bridge;
     }
 
-    public void firstTurn() {
-        selectUpOrDown();
-    }
-
     public void move() {
         previousX = currentX;
         previousY = currentY;
@@ -19,7 +15,7 @@ public class Com extends Player {
         selectUpOrDown();
     }
 
-    private void selectUpOrDown() {
+    public void selectUpOrDown() {
         int num = (int) (Math.random() * 2);
         if (bridge.getElement(num, currentX) != null) {
             Glass glass = (Glass) bridge.getElement(num, currentX);

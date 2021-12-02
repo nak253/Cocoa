@@ -19,29 +19,19 @@ public class SteppingStones {
     public void start() {
         setPlayerNum();
         while (!stopped&&!isPlayerTurn()){
-            comStart();
+            Com com = new Com(bridge);
+            crossTheBridge(com);
         }
         if(!stopped){
-            playerStart();
+            user = new User();
+            crossTheBridge(user);
+            stopped = true;
         }
         System.out.println("게임이 종료되었습니다.");
     }
 
     private boolean isPlayerTurn() {
         return count == playerNum;
-    }
-
-    private void comStart() {
-        printPlayerNum();
-        Com com = new Com(bridge);
-        crossTheBridge(com);
-    }
-
-    private void playerStart() {
-        printPlayerNum();
-        user = new User();
-        crossTheBridge(user);
-        stopped = true;
     }
 
     private void printPlayerNum() {
@@ -58,7 +48,8 @@ public class SteppingStones {
     }
 
     private void crossTheBridge(Player player) {
-        player.firstTurn();
+        printPlayerNum();
+        player.selectUpOrDown();
         while (bridge.isPassStep(player)) {
             bridge.printBridge();
             player.move();

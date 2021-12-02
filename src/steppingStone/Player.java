@@ -22,7 +22,9 @@ public abstract class Player extends Element {
         return currentY;
     }
 
-    public abstract void firstTurn();
+    public abstract void selectUpOrDown();
 
-    abstract public void move();
+    public abstract void move();
 }
+
+

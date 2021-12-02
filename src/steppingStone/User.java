@@ -16,10 +16,6 @@ public class User extends Player{
         validator = new Validator();
     }
 
-    public void firstTurn() {
-        selectUpOrDown();
-    }
-
     public void move() {
         previousX=currentX;
         previousY=currentY;
@@ -27,7 +23,7 @@ public class User extends Player{
         currentX++;
     }
 
-    private void selectUpOrDown() {
+    public void selectUpOrDown() {
         String input = "";
         while (!validator.correctInput(input)){
             System.out.println("위(W)또는 아래(S)를 입력하세요");

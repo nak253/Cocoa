@@ -2,7 +2,7 @@ package steppingStone;
 
 public class Bridge {
     private final int WIDTH_OF_BRIDGE = 2;
-    private final int LENGTH_OF_BRIDGE = 4;
+    private final int LENGTH_OF_BRIDGE = 9;
 
     private Element[][] elements;
 
